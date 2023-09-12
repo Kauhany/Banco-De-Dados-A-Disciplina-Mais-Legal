@@ -76,3 +76,9 @@ SELECT alunos.nome AS Aluno, COUNT(matriculas.id) AS ttl_matricula
 FROM alunos
 LEFT JOIN matriculas ON alunos.id = matriculas.aluno_id
 GROUP BY alunos.nome;
+
+SELECT produto, COUNT(id) AS QuantTransacoes
+FROM vendas
+GROUP BY produto
+ORDER BY QuantTransacoes DESC
+LIMIT 1;
