@@ -7,3 +7,8 @@ SELECT livros.titulo
 FROM livros
 JOIN autores ON livros.autor_id = autores.id
 WHERE autores.nome = 'J.K. Rowling';
+
+SELECT alunos.nome
+FROM alunos
+JOIN matriculas ON alunos.id = matriculas.aluno_id
+WHERE matriculas.curso = 'Engenharia de Software';
