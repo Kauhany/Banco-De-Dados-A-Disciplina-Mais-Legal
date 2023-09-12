@@ -44,3 +44,7 @@ HAVING COUNT(livros.id) > 2;
 SELECT livros.titulo AS livro, autores.nome AS autor
 FROM livros
 JOIN autores ON livros.autor_id = autores.id;
+
+SELECT alunos.nome, matriculas.curso
+FROM alunos
+RIGHT JOIN matriculas ON alunos.id = matriculas.aluno_id;
