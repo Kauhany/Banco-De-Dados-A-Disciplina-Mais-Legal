@@ -71,3 +71,8 @@ LIMIT 1;
 SELECT produto, MIN(receita) AS Menor_Rec
 FROM vendas
 GROUP BY produto;
+
+SELECT alunos.nome AS Aluno, COUNT(matriculas.id) AS ttl_matricula
+FROM alunos
+LEFT JOIN matriculas ON alunos.id = matriculas.aluno_id
+GROUP BY alunos.nome;
