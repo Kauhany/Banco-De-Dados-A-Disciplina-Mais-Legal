@@ -60,3 +60,10 @@ RIGHT JOIN matriculas ON alunos.id = matriculas.aluno_id;
 SELECT alunos.nome AS Aluno, matriculas.curso AS Curso
 FROM alunos
 INNER JOIN matriculas ON alunos.id = matriculas.aluno_id;
+
+SELECT autores.nome AS Autor, COUNT(livros.id) AS Quantlivros
+FROM autores
+LEFT JOIN livros ON autores.id = livros.autor_id
+GROUP BY autores.nome
+ORDER BY Quantlivros DESC
+LIMIT 1;
