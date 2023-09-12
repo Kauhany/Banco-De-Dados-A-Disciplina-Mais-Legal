@@ -67,3 +67,7 @@ LEFT JOIN livros ON autores.id = livros.autor_id
 GROUP BY autores.nome
 ORDER BY Quantlivros DESC
 LIMIT 1;
+
+SELECT produto, MIN(receita) AS Menor_Rec
+FROM vendas
+GROUP BY produto;
