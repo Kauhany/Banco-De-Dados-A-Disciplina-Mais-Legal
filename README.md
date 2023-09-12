@@ -34,3 +34,9 @@ SELECT produto
 FROM vendas
 GROUP BY produto
 HAVING SUM(receita) > 10000;
+
+SELECT autores.nome, COUNT(livros.id) AS ttl_livros
+FROM autores
+JOIN livros ON autores.id = livros.autor_id
+GROUP BY autores.id
+HAVING COUNT(livros.id) > 2;
