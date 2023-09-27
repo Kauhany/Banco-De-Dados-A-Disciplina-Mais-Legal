@@ -268,3 +268,44 @@ END;
 DELIMITER ;
 
 CALL sp_TitulosPorCategoria('Romance');
+
+-- Ex:7
+DELIMITER //
+
+CREATE PROCEDURE sp_AdicionarLivro(
+    IN p_Titulo VARCHAR(255),
+    IN p_Editora_ID INT,
+    IN p_Ano_Publicacao INT,
+    IN p_Numero_Paginas INT,
+    IN p_Categoria_ID INT
+)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Erro: Não foi possível adicionar o livro. Verifique os dados e tente novamente.';
+    END;
+
+    START TRANSACTION;
+    
+    -- Verificar se o título do livro já existe
+    IF EXISTS (SELECT 1 FROM Livro WHERE Titulo = p_Titulo) THEN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Erro: Já existe um livro com o mesmo título.';
+    ELSE
+        -- Inserir o novo livro na tabela Livro
+        INSERT INTO Livro (Titulo, Editora_ID, Ano_Publicacao, Numero_Paginas, Categoria_ID)
+        VALUES (p_Titulo, p_Editora_ID, p_Ano_Publicacao, p_Numero_Paginas, p_Categoria_ID);
+
+        COMMIT;
+        SELECT 'Livro adicionado com sucesso.';
+    END IF;
+    
+END;
+//
+
+DELIMITER ;
+
+CALL sp_AdicionarLivro('A culpa é das estrelas', 2, 2012, 288, 1);
