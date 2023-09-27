@@ -327,3 +327,13 @@ END;
 DELIMITER ;
 
 CALL sp_AutorMaisAntigo();
+
+-- Ex:9 - falando sobre o 8
+-- DELIMITER //:É usado para mudar o delimitador padrão do SQL temporariamente para //
+-- CREATE PROCEDURE sp_AutorMaisAntigo(): Define a criação de uma nova stored procedure chamada sp_AutorMaisAntigo sem parâmetros. 
+-- BEGIN: Indica o início do corpo da stored procedure, onde o código SQL real da procedimento é colocado.
+-- SELECT Nome, Sobrenome FROM Autor: Instrução SQL que seleciona os campos Nome e Sobrenome da tabela Autor. Isso é o que será retornado pela stored procedure como resultado.
+-- WHERE Data_Nascimento = (SELECT MIN(Data_Nascimento) FROM Autor): Filtra os registros na tabela Autor. Ela compara a coluna Data_Nascimento com o resultado de uma subconsulta que encontra a data de nascimento mais antiga na tabela Autor usando a função MIN para encontrar o mínimo valor da coluna Data_Nascimento.
+-- END: Indica o fim do corpo da stored procedure.
+-- DELIMITER ;: Restaura o delimitador padrão para o ponto e vírgula (;) após a definição da stored procedure.
+
