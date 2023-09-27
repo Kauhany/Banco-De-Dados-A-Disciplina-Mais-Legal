@@ -216,3 +216,27 @@ DELIMITER ;
 
 CALL sp_ContarLivrosPorCategoria('Romance', @total);
 SELECT @total AS TotalLivrosNaCategoria;
+
+
+-- Ex:4
+DELIMITER //
+CREATE PROCEDURE sp_VerificarLivrosCategoria(IN categoriaNome VARCHAR(100), OUT categoriaPossuiLivros BOOLEAN)
+BEGIN
+    DECLARE contador INT;
+
+    SELECT COUNT(*) INTO contador
+    FROM Livro
+    INNER JOIN Categoria ON Livro.Categoria_ID = Categoria.Categoria_ID
+    WHERE Categoria.Nome = categoriaNome;
+
+    IF contador > 0 THEN
+        SET categoriaPossuiLivros = TRUE;
+    ELSE
+        SET categoriaPossuiLivros = FALSE;
+    END IF;
+END;
+//
+DELIMITER ;
+
+CALL sp_VerificarLivrosCategoria('Romance', @possuiLivros);
+SELECT @possuiLivros AS CategoriaPossuiLivros;
